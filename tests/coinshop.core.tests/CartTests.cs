@@ -80,8 +80,8 @@ namespace coinshop.core.tests
             
             Cart.ApplyDiscount("HIREME");
 
-            Cart.Total().Should().Be(itemPrice / 2.0M);
-
+            Cart.Total().Should().Be(itemPrice / 2.0M); // this discount is 50%
+            Cart.SubTotal().Should().Be(itemPrice); // sub total is unchanged
         }
     }
 }
