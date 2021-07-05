@@ -13,14 +13,16 @@ namespace coinshop.ui
 
 			var forSale = new List<Item>
 			{
-				new ("Coin", 3),
-				new ("Expensive Coin", 10)
+				new ("Una and the Lion", 20),
+				new ("1933 Penny", 45),
+				new ("Brasher Doubloon", 50),
+				new ("1794 Flowing Hair Silver Dollar", 2)
 			};
 			
 			var cart = new Cart(new DiscountRepository(
 				new Dictionary<string, decimal>
 				{
-					{ "seth", .9M }
+					{ "seth", .8M }
 				}
 			));
 
@@ -40,17 +42,24 @@ namespace coinshop.ui
 				Height = Dim.Fill() - 1
 			};					
 
+			var welcome = new Label(@"Greetings and welcome to my shop!
+Enter discount code 'seth' for 20% off :)
+-----------------------------------------")
+			{
+				Width = 10,
+				Height = 3
+			};
+			
 			var discountLabel = new Label("Discount: ")
 			{
-				X = 1,
-				Y = 2,
+				Y = Pos.Bottom(welcome),
 				Width = 12,
 				Height = 1
 			};
 			var discountField = new TextField("")
 			{
 				X = Pos.Right(discountLabel),
-				Y = 2,
+				Y = Pos.Bottom(welcome),
 				Width = 12,
 				Height = 1
 			};
@@ -80,7 +89,7 @@ namespace coinshop.ui
 			var i = 0;
 			foreach (var item in items)
 			{
-				var button = new Button($"{item.Price} - {item.Name}")
+				var button = new Button($"{item.Name} - {item.Price}")
 				{
 					Y = i,
 				};
@@ -94,6 +103,7 @@ namespace coinshop.ui
 			}
 			
 			coinShop.Add (
+				welcome,
 				discountLabel,
 				discountField,
 				forSale,
@@ -105,14 +115,18 @@ namespace coinshop.ui
 		private static void UpdateCart(View cartView, Cart cart)
 		{
 			cartView.RemoveAll(); // I'm sure there must be a _right_ way to do this
-			var list = new List<string>(cart.Items()
-				.Select(i => $"{i.Value}x {i.Key.Name} = {i.Value * i.Key.Price}").ToList())
+			if (cart.Items().Any())
 			{
-				"----",
-				$"SubTotal: {cart.SubTotal()}", 
-				$"Total: {cart.Total()}"
-			};
-			cartView.Add(new ListView(list));
+				var list = new List<string>(cart.Items()
+					.Select(i => $"{i.Value}x {i.Key.Name} = {i.Value * i.Key.Price}")
+					.ToList())
+				{
+					"----",
+					$"SubTotal: {cart.SubTotal()}", 
+					$"Total: {cart.Total()}"
+				};
+				cartView.Add(new ListView(list));
+			}
 			cartView.Redraw(cartView.Bounds);
 		}
 	}
