@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
@@ -7,7 +6,11 @@ namespace coinshop.core.tests
 {
     public class CartTests
     {
-        public Cart Cart { get; set; } = new Cart();
+        private Cart Cart { get; set; } = new Cart(new DiscountRepository(
+            new Dictionary<string, decimal>
+            {
+                {"test", 1M}
+            }));
         
         [Fact]
         public void CanAddItemToCart()

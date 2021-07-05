@@ -6,14 +6,6 @@ namespace coinshop.core
     {
         private readonly Dictionary<string, decimal> _discounts;
 
-        public DiscountRepository()
-        {
-           _discounts = new Dictionary<string, decimal>
-            {
-                { "seth", 0.5M}
-            };
-        }
-
         public DiscountRepository(Dictionary<string, decimal> discounts)
         {
             _discounts = discounts;
