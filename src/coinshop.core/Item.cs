@@ -33,5 +33,6 @@ namespace coinshop.core
         {
             return (Name != null ? Name.GetHashCode() : 0);
         }
+
     }
 }

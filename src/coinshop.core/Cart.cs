@@ -5,7 +5,7 @@ namespace coinshop.core
 {
     public class Cart
     {
-        private decimal _discount = 1;
+        private string DiscountCode = "";
         private readonly Dictionary<Item, int> _items = new Dictionary<Item, int>();
         private readonly DiscountRepository _discountRepository;
 
@@ -29,14 +29,16 @@ namespace coinshop.core
             }
         }
 
+        public Dictionary<Item, int> Items() => _items;
+
         public decimal SubTotal()
             => _items.Select(i => i.Key.Price * i.Value).Sum();
 
-        public decimal Total() => SubTotal() * _discount;
+        public decimal Total() => SubTotal() * _discountRepository.GetDiscountOrDefault(DiscountCode);
 
         public void ApplyDiscount(string code)
         {
-            _discount = _discountRepository.GetDiscountOrDefault(code);
+            DiscountCode = code;
         }
     }
 }

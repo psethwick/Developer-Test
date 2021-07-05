@@ -1,8 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Terminal.Gui" Version="0.81.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\coinshop.core\coinshop.core.csproj" />
+  </ItemGroup>
 </Project>
