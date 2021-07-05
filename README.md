@@ -1,41 +1,28 @@
-# 288 CST Developer Test
-Technical test for prospective developers.
+# Seth's Coin Shop
+## Approach
 
-## Overview
-We are currently working with cloud based solutions and use a variety of technologies. Most of the codebase is written in C# with some PHP.  
+Went for a really basic (but SOLID) simple C# class-based approach for the core `Cart` functionality.
 
-## Getting Started
+An `Item` has a name and a price.
 
-Fork this git repository and create a C# application to implement the task below. The application could be a desktop app, a website, a console application, etc..
+`Cart` is responsible for holding any number of items and calculating totals.
 
-The task should not take too long to complete, perhaps a few hours, but you can spend as much time as you like. Once you are happy you have met the requirements please include a readme about your approach, what changes and/or refactoring you would do given more time, etc. and send us a link to your repository so we can review the code.
+A `Cart` also has a `DiscountRepository` which just holds available code/discount pairs.
 
-## The Task
+The UI is built with [Terminal.Gui](https://github.com/migueldeicaza/gui.cs), which I had been meaning to try out since I read about it on Scott Hanselman's excellent [blog](https://www.hanselman.com/blog/its-2020-and-it-is-time-for-text-mode-with-guics).
 
-As we are an e-commerce shop, it is fitting to build a small shopping cart solution with the following features:
+## With More Time
 
-```
-As a User
-I Want to be able to add a single product to a basket
-```
+### coinshop.core
 
-```
-As a User
-I want to be able to add multiple products to a basket
-```
+Definitely would need some kind of `Inventory` next, it should not be a concern of `coinshop.ui`.
 
-```
-As a User
-I want to be able to see the total cost of my basket
-```
+Add some (not in-memory) storage mechanism for the `Cart` items. `DiscountRepository` and `Inventory` should also have some storage.
 
-```
-As a User
-I want to be able apply a discount code and see the price before and after the discount
-```
+Some dependency injection, I didn't already do it because it would have felt like over-engineering with only in-memory storage. Should be a relatively straightforward drop-in with how it's already composed.
 
-You must demonstrate:
- - The ability to write good Unit/Integration tests
- - Show knowledge of good practices e.g. Design Patterns, SOLID Principles, etc..
+### coinshop.ui
 
+I'm not that happy with the overall layout/alignment, so I would spend some time re-designing it and wrangling `Terminal.Gui`
 
+Would be nice to get some user interface tests in!
