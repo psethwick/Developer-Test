@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
@@ -6,7 +7,7 @@ namespace coinshop.core.tests
 {
     public class CartTests
     {
-        public Cart Cart { get; } = new Cart();
+        public Cart Cart { get; set; } = new Cart();
         
         [Fact]
         public void CanAddItemToCart()
@@ -73,14 +74,19 @@ namespace coinshop.core.tests
         {
             const int itemPrice = 3;
             var item = new Item("Bar", itemPrice);
+
+            Cart = new Cart(new DiscountRepository(new Dictionary<string, decimal>
+            {
+                {"fiftypercent", 0.5M}
+            }));
             
             Cart.AddItem(item, 1);
 
             Cart.Total().Should().Be(itemPrice);
             
-            Cart.ApplyDiscount("HIREME");
+            Cart.ApplyDiscount("FIFTYPERCENT");
 
-            Cart.Total().Should().Be(itemPrice / 2.0M); // this discount is 50%
+            Cart.Total().Should().Be(itemPrice / 2.0M);
             Cart.SubTotal().Should().Be(itemPrice); // sub total is unchanged
         }
     }

@@ -7,7 +7,16 @@ namespace coinshop.core
     {
         private decimal _discount = 1;
         private readonly Dictionary<Item, int> _items = new Dictionary<Item, int>();
-        private readonly DiscountRepository _discountRepository = new DiscountRepository();
+        private readonly DiscountRepository _discountRepository;
+
+        public Cart()
+        {
+            _discountRepository = new DiscountRepository();
+        }
+        public Cart(DiscountRepository discountRepository)
+        {
+            _discountRepository = discountRepository;
+        }
         public void AddItem(Item item, int quantity)
         {
             if (_items.TryGetValue(item, out var existingQuantity))
