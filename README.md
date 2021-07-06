@@ -35,4 +35,4 @@ It's currently not possible to remove items from the `Cart` and it probably shou
 
 I feel like there must be a better way to do binding/refresh in `Terminal.Gui`, would be nice to tidy that up.
 
-Would be nice to get some user interface tests in!
+Some user interface tests!
