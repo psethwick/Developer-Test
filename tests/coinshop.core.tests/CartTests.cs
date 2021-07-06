@@ -15,7 +15,7 @@ namespace coinshop.core.tests
         [Fact]
         public void CanAddItemToCart()
         {
-            Cart.AddItem(new Item("Foo", 1), 1);
+            Cart.AddItem(new Item("Foo", 1));
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace coinshop.core.tests
             const int itemPrice = 3;
             var item = new Item("Bar", itemPrice);
             
-            Cart.AddItem(item, 1);
+            Cart.AddItem(item);
 
             Cart.Total().Should().Be(itemPrice);
         }
@@ -41,8 +41,8 @@ namespace coinshop.core.tests
             const int itemPrice = 3;
             var item = new Item("Foo", itemPrice);
             
-            Cart.AddItem(item, 1);
-            Cart.AddItem(item, 1);
+            Cart.AddItem(item);
+            Cart.AddItem(item);
 
             Cart.Total().Should().Be(itemPrice * 2);
         }
@@ -54,9 +54,9 @@ namespace coinshop.core.tests
             var item1 = new Item("Foo", itemPrice);
             var item2 = new Item("Bar", itemPrice);
             
-            Cart.AddItem(item1, 1);
-            Cart.AddItem(item2, 1);
-            Cart.AddItem(item2, 1);
+            Cart.AddItem(item1);
+            Cart.AddItem(item2);
+            Cart.AddItem(item2);
 
             Cart.Total().Should().Be(itemPrice * 3);
         }
@@ -66,8 +66,8 @@ namespace coinshop.core.tests
         {
             var item = new Item("Foo", 3);
             
-            Cart.AddItem(item, 1);
-            Cart.AddItem(item, -1);
+            Cart.AddItem(item);
+            Cart.RemoveItem(item);
 
             Cart.Total().Should().Be(0);
         }
@@ -83,7 +83,7 @@ namespace coinshop.core.tests
                 {"fiftypercent", 0.5M}
             }));
             
-            Cart.AddItem(item, 1);
+            Cart.AddItem(item);
 
             Cart.Total().Should().Be(itemPrice);
             

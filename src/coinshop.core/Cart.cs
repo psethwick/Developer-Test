@@ -13,7 +13,10 @@ namespace coinshop.core
         {
             _discountRepository = discountRepository;
         }
-        public void AddItem(Item item, int quantity)
+
+        public void AddItem(Item item) => AddItem(item, 1);
+        public void RemoveItem(Item item) => AddItem(item, -1);
+        private void AddItem(Item item, int quantity)
         {
             if (_items.TryGetValue(item, out var existingQuantity))
             {
@@ -24,7 +27,6 @@ namespace coinshop.core
                 _items[item] = quantity;
             }
         }
-
         public Dictionary<Item, int> Items() => _items;
 
         public decimal SubTotal()

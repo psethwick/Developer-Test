@@ -96,7 +96,7 @@ Enter discount code 'seth' for 20% off :)
 				i++; // otherwise we end up drawing over
 				button.Clicked += () =>
 				{
-					cart.AddItem(item, 1);
+					cart.AddItem(item);
 					UpdateCart(cartView, cart);
 				};
 				forSale.Add(button);
